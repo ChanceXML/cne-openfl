@@ -282,6 +282,8 @@ import lime.math.Vector2;
 	@:noCompletion private var __state:Context3DState;
 	@:noCompletion private var __vertexConstants:Float32Array;
 
+	public var helloVar:Int = 123;
+
 	@:noCompletion private function new(stage:Stage, contextState:Context3DState = null, stage3D:Stage3D = null)
 	{
 		super();
@@ -457,9 +459,22 @@ import lime.math.Vector2;
 		dispose() or because the underlying rendering hardware has been lost.
 		@throws	Error	3768: The Stage3D API may not be used during background execution.
 	**/
+		/**
+		Clears the color, depth, and stencil buffers associated with this Context3D
+		object and fills them with the specified values.
+		...
+	**/
 	public function clear(red:Float = 0, green:Float = 0, blue:Float = 0, alpha:Float = 1, depth:Float = 1, stencil:UInt = 0,
 			mask:UInt = Context3DClearMask.ALL):Void
 	{
+		__clear(false, red, green, blue, alpha, depth, stencil, mask);
+	}
+
+	public function hello():Void {}
+
+	@:noCompletion public function __clear(useScissor:Bool, red:Float = 0, green:Float = 0, blue:Float = 0, alpha:Float = 1, depth:Float = 1,
+		stencil:UInt = 0, mask:UInt = Context3DClearMask.ALL)
+	    {
 		__flushGLFramebuffer();
 		__flushGLViewport();
 
@@ -519,9 +534,17 @@ import lime.math.Vector2;
 
 		if (clearMask == 0) return;
 
-		__setGLScissorTest(false);
+		if (useScissor)
+		{
+			__flushGLScissor();
+		}
+		else
+		{
+			__setGLScissorTest(false);
+		}
+
 		gl.clear(clearMask);
-	}
+    }
 
 	/**
 		Sets the viewport dimensions and other attributes of the rendering buffer.
