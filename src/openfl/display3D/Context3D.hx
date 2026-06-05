@@ -463,6 +463,8 @@ import lime.math.Vector2;
 		__clear(false, red, green, blue, alpha, depth, stencil, mask);
 	}
 
+	public function hello():Void {}
+
 	@:noCompletion public function __clear(useScissor:Bool, red:Float = 0, green:Float = 0, blue:Float = 0, alpha:Float = 1, depth:Float = 1,
 			stencil:UInt = 0, mask:UInt = Context3DClearMask.ALL)
 	{
