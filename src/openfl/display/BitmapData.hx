@@ -3221,6 +3221,8 @@ class BitmapData implements IBitmapDrawable
 
 			context.hello();
 
+			trace(context.helloVar);
+
 			@:privateAccess context.__clear(useScissor, color.r / 0xFF, color.g / 0xFF, color.b / 0xFF, transparent ? color.a / 0xFF : 1, 0, 0, Context3DClearMask.COLOR);
 
 			if (useScissor)
