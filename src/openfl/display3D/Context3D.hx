@@ -282,6 +282,8 @@ import lime.math.Vector2;
 	@:noCompletion private var __state:Context3DState;
 	@:noCompletion private var __vertexConstants:Float32Array;
 
+	public var helloVar:Int = 123;
+
 	@:noCompletion private function new(stage:Stage, contextState:Context3DState = null, stage3D:Stage3D = null)
 	{
 		super();
